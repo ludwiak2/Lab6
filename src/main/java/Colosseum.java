@@ -1,3 +1,4 @@
+import java.sql.SQLOutput;
 import java.util.Scanner;
 
 /**
@@ -43,7 +44,7 @@ public class Colosseum {
      * The process will still be the same for getting the information from the user,
      * but now we are adding the feature where the user can pick what TYPE of
      * Pokemon we are going to battle.
-     *
+     * <p>
      * How we will build our Pokemon to battle.
      * <p>
      * Have the user select from a list of 3 different types of Pokemon.
@@ -99,12 +100,62 @@ public class Colosseum {
      * Sorry. The defense level must be between 1 and 23: 23
      *
      * @return tempPokemon - the Pokemon we built and are going to set our fighting Pokemon to <br>
-     *         (Look, we can return objects too!)
-     *         <p>
+     * (Look, we can return objects too!)
+     * <p>
      */
     public static Pokemon buildPokemon() {
-        Pokemon returnPokemon = null;
-        return returnPokemon;
+        Pokemon tempPokemon = new Pokemon();
+        String name;
+        int hitPoints, attacklvl, defenselvl;
+        myScan = new Scanner(System.in);
+        System.out.println("Select from the following Pokemon types\n 1- Electric Pokemon\n 2- Fire Pkcaemon\n3 - Water Pokemon");
+        int num = myScan.nextInt();
+
+        while (num != 1 && num != 2 && num != 3) {
+            System.out.println("Sorry, you must pick either 1, 2, or 3: ");
+            num = myScan.nextInt();
+        }
+
+        System.out.println(" Please name your Pokemon ");
+        name = myScan.nextLine();
+        System.out.println(" How many hit Points will it have? ( 1-50):");
+        hitPoints = myScan.nextInt();
+
+        while (hitPoints < 1 || hitPoints > 50) {
+            System.out.print("sorry. Hit points must be between 1 and 50:");
+            hitPoints = myScan.nextInt();
+        }
+
+        do {
+            System.out.println("Split fifty points between attack level and defense level.");
+            System.out.print("Enter your attack level (1-49");
+            attacklvl = myScan.nextInt();
+
+            while (attacklvl < 1 || attacklvl > 49) {
+                System.out.print("sorry. Hit attacklvl must be between 1 and 50:");
+                attacklvl = myScan.nextInt();
+
+
+            }
+            System.out.print("Enter your defense level (1-23):");
+            defenselvl = myScan.nextInt();
+            while (defenselvl < 1 || defenselvl > 23) {
+                System.out.print("sorry. Hit defenselvl must be between 1 and 23:");
+                defenselvl = myScan.nextInt();
+
+
+            }
+        } while (defenselvl + attacklvl > 50);
+        tempPokemon.setName(name);
+        tempPokemon.setHitPoints(hitPoints);
+        tempPokemon.setAttackLevel(attacklvl);
+        tempPokemon.setDefenseLevel(defenselvl);
+
+
+        if num == 1)
+        // R.I.P code//
+        return tempPokemon;
+
     }
 
     /**
@@ -190,18 +241,20 @@ public class Colosseum {
             secondPokemon = tempPokemon;
         }
     }
+
     /**
      * Just a simple menu printer for the types of Pokemon
      * so we don't clutter other functions printing it over and over. <p>
      * You do not need to modify this function.
      */
     public static void printTypeMenu() {
-       System.out.println("Select from the following Pokemon types: ");
-       System.out.println("1 - Electric Pokemon ");
-       System.out.println("2 - Fire Pokemon");
-       System.out.println("3 - Water Pokemon");
+        System.out.println("Select from the following Pokemon types: ");
+        System.out.println("1 - Electric Pokemon ");
+        System.out.println("2 - Fire Pokemon");
+        System.out.println("3 - Water Pokemon");
 
     }
+
     /**
      * Conducts the Pokemon battle.
      * <p>

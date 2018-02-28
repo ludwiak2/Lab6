@@ -33,33 +33,40 @@ public class ElectricPokemon extends Pokemon {
      * execute a fatal specialty attack to immediately win the game.
      * <p>
      * Requirements for a specialty attack: <br>
-     *  - The normal attack wasn't already fatal <br>
-     *  - The type of the opponent pokemon is not ELECTRIC <br>
-     *  - The probability of the specialty attack is greater than
-     *    the next random value <br>
-     *  - We should print out the specialty attack used <br>
-     *  - Opponent's HP goes to 0 <br>
-     *  - Returns true that the opponent has been defeated and game is over <br>
-     *
+     * - The normal attack wasn't already fatal <br>
+     * - The type of the opponent pokemon is not ELECTRIC <br>
+     * - The probability of the specialty attack is greater than
+     * the next random value <br>
+     * - We should print out the specialty attack used <br>
+     * - Opponent's HP goes to 0 <br>
+     * - Returns true that the opponent has been defeated and game is over <br>
+     * <p>
      * Hint: Math.random() is static, or you can use the random import <br>
-     *
-     *
+     * <p>
+     * <p>
      * Example of a specialty attack hitting:
      * Pikachu is attacking Bubba <br>
      * Pikachu rolls an attack bonus of 6 <br>
      * Bubba rolls a defense bonus of 13 <br>
      * The attack missed! <br>
-     *
+     * <p>
      * Pikachu executes a specialty attack... THUNDERBOLT!!! <br>
      * Bubba has been defeated! <br>
      *
      * @param opponent the Pokemon to attack
      * @return whether or not the game has ended
-     *
+     * <p>
      * Implement this.
      */
     public boolean attack(final Pokemon opponent) {
-        return false;
-    }
+        if (!super.attack(opponent) && !opponent.pokeType.equals(PokemonType.ELECTRIC)
+                || this.specialtyProbability > Math.random()) {
+                System.out.println(this.getName() + "executes a specialty attack... " + this.specialtyAttack+ "!!!");
+               opponent.setHitPoints(0);
+               System.out.println("opponent" + opponent.getName() + "has been defeated!");
 
+               return true;
+        }
+        return  false;
+    }
 }
